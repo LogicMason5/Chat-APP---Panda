@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1066949571374",
+    "firebase_url": "https://chatpanda-6df22.firebaseio.com",
+    "project_id": "chatpanda-6df22",
+    "storage_bucket": "chatpanda-6df22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066949571374:android:f9a952a5b66e12975c80bf",
+        "android_client_info": {
+          "package_name": "com.example.chatpanda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066949571374-m6lhuotsp8cniun8a2a54prnrott176s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBso-IaB9BFYyoyO1nafshW1o-C8gK8sAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066949571374-m6lhuotsp8cniun8a2a54prnrott176s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

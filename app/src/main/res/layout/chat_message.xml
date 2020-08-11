@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:text="Sender"
+        android:textColor="#2d3436"
+        android:layout_gravity="start"
+        ></TextView>
+
+    <TextView
+        android:id="@id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:padding="12dp"
+        android:lineSpacingExtra="2dp"
+        android:text="Hi! How are you"
+        android:textColor="#353b48"
+        android:background="@drawable/message_bubble_incoming"
+        android:paddingLeft="20dp"
+        android:paddingTop="4dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:textSize="13.5dp"/>
+
+    
+</LinearLayout>

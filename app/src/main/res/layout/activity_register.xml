@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@color/colorblack">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Register"
+        android:gravity="center"
+        android:textSize="50dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorHintGry"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegisterUsername"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Username"
+        android:textColorHint="@color/colorHintGry"
+        app:boxBackgroundColor="@color/colorWhite"
+        app:boxStrokeColor="@color/colorWhite"
+        android:layout_marginTop="20sp"
+        >
+
+      <EditText
+          android:id="@+id/et_Register_Username"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="text"
+          android:maxLines="1"
+          android:outlineAmbientShadowColor="@color/colorWhite"
+          android:shadowColor="@color/colorWhite"
+          android:singleLine="true"
+          android:textColor="@color/colorWhite"
+          android:textColorHighlight="@color/colorWhite"
+          android:textColorHint="@color/colorHintGry"
+          android:textColorLink="@color/colorWhite"
+          android:textSize="18dp"
+          android:layout_marginTop="20sp"></EditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/RegisterEmail"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Email ID"
+        android:textColorHint="@color/colorHintGry"
+        app:boxBackgroundColor="@color/colorWhite"
+        app:boxStrokeColor="@color/colorWhite"
+        android:layout_marginTop="20sp"
+        >
+
+        <EditText
+            android:id="@+id/et_Register_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:outlineAmbientShadowColor="@color/colorWhite"
+            android:shadowColor="@color/colorWhite"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorWhite"
+            android:textColorHint="@color/colorHintGry"
+            android:textColorLink="@color/colorWhite"
+            android:textSize="18dp"
+            android:layout_marginTop="20sp"></EditText>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColorHint="@color/colorHintGry"
+        app:boxBackgroundColor="@color/colorWhite"
+        app:boxStrokeColor="@color/colorWhite"
+        android:layout_marginTop="20sp"
+    >
+        <EditText
+            android:id="@+id/et_Register_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textSize="18dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorHintGry"
+            android:textColorLink="@color/colorWhite"
+            android:layout_marginTop="20sp"
+            android:outlineAmbientShadowColor="@color/colorWhite"
+            android:shadowColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorWhite"></EditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:textColorHint="@color/colorHintGry"
+        app:boxBackgroundColor="@color/colorWhite"
+        app:boxStrokeColor="@color/colorWhite"
+        >
+        <EditText
+            android:id="@+id/et_Register_ConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:textSize="18dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorHintGry"
+            android:textColorLink="@color/colorWhite"
+            android:layout_marginTop="20dp"
+            android:outlineAmbientShadowColor="@color/colorWhite"
+            android:shadowColor="@color/colorWhite"
+            android:textColorHighlight="@color/colorWhite"></EditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_Register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorblack"
+        android:gravity="center"
+        android:onClick="Register"
+        android:text="Register"
+        android:textColor="@color/colorWhite"
+
+        android:textColorHighlight="@color/colorHint"></Button>
+
+
+
+
+
+</LinearLayout>
+
+
+</ScrollView>

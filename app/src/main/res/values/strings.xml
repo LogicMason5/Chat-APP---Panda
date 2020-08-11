@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChatPanda</string>
+    <string name="Login">Login</string>
+    <string name="UsernameHint">Email ID</string>
+    <string name="RegisterNow">Dont have a account? Register Now</string>
+    <string name="Invalid_Email">Your Email is Invalid </string>
+    <string name="Invalid_Password">Your Password is Invalid</string>
+    <string name="Incorrect_Password">Your Password is Incorrect</string>
+    <string name="field_required">Please fill all the fields</string>
+</resources>
