@@ -19,19 +19,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-/**@author : Swaraj Deshmukh
- *  Date : 22/07/2020
- *
+/**
+ * @author : Swaraj Deshmukh
+ * Date : 22/07/2020
  */
 public class RegisterActivity extends AppCompatActivity {
 
-    public static final String Chat_Pref = "ChatPref";
-    public static final String User_Name = "UserName";
+    public static final String CHAT_PREF = "ChatPref";
+    public static final String USER_NAME = "UserName";
 
-   private EditText Username, ConfirmPassowrd , Password, Email;
-   private Button Register;
+    private EditText etUsername, etPassword, etConfirmPassword, etEmail;
+    private Button btnRegister;
 
-   //Firebase Reference
+    // Firebase Auth instance
     private FirebaseAuth mAuth;
 
     @Override
@@ -39,133 +39,103 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Username = findViewById(R.id.et_Register_Username);
-        ConfirmPassowrd = findViewById(R.id.et_Register_ConfirmPassword);
-        Password = findViewById(R.id.et_Register_Password);
-        Email = findViewById(R.id.et_Register_Email);
-        Register = findViewById(R.id.btn_Register);
+        // Initialize views
+        etUsername = findViewById(R.id.et_Register_Username);
+        etPassword = findViewById(R.id.et_Register_Password);
+        etConfirmPassword = findViewById(R.id.et_Register_ConfirmPassword);
+        etEmail = findViewById(R.id.et_Register_Email);
+        btnRegister = findViewById(R.id.btn_Register);
 
-
-        //Firebase Instance
+        // Firebase instance
         mAuth = FirebaseAuth.getInstance();
 
-
-    }
-    //Methods on clicking
-    public void Register(View v){
-        UserRegister();
-
+        // Set click listener
+        btnRegister.setOnClickListener(v -> registerUser());
     }
 
+    /** Handles user registration */
+    private void registerUser() {
+        // Reset errors
+        etEmail.setError(null);
+        etPassword.setError(null);
 
-    //Registration
-    private void UserRegister(){
-
-        Email.setError(null);
-        Password.setError(null);
-
-        String email = Email.getText().toString();
-        String password = Password.getText().toString();
+        // Get user input
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String confirmPassword = etConfirmPassword.getText().toString().trim();
 
         boolean cancel = false;
-        View focusView = null; //kill switch
+        View focusView = null;
 
-        //Password
-        if(!ValidatePassword(password)){
-            Password.setError(getString(R.string.Invalid_Password));
-            focusView = Password;
+        // Validate password
+        if (!isPasswordValid(password, confirmPassword)) {
+            etPassword.setError(getString(R.string.Invalid_Password));
+            focusView = etPassword;
             cancel = true;
         }
 
-        //Email
-        if (TextUtils.isEmpty(email) && !ValidateEmail(email)){
-            Email.setError(getString(R.string.Invalid_Email));
-            focusView = Email;
+        // Validate email
+        if (!isEmailValid(email)) {
+            etEmail.setError(getString(R.string.Invalid_Email));
+            focusView = etEmail;
             cancel = true;
         }
 
-        if (cancel){
-            focusView.requestFocus(); //focusView implementation
-        }else{
-            createUser(); //createUser method calling
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            createUser(email, password);
         }
-
     }
 
-
-
-
-    //Validate email
-    private boolean ValidateEmail(String email){
-        return email.contains("@");
+    /** Validates email format */
+    private boolean isEmailValid(String email) {
+        return !TextUtils.isEmpty(email) && email.contains("@");
     }
 
-    //Validate Passwords
-    private boolean ValidatePassword(String password){
-        String confirmPassword = ConfirmPassowrd.getText().toString();
-        return ((!password.equals(""))
-               && (password !=null)
-               && (confirmPassword.equals(password))
-               && (password.length()>6));
+    /** Validates password and confirm password */
+    private boolean isPasswordValid(String password, String confirmPassword) {
+        return !TextUtils.isEmpty(password)
+                && password.length() > 6
+                && password.equals(confirmPassword);
     }
 
-
-
-
-    //Use shared preferences for saving Username
-    private void SaveUsername(){
-        String UserNamePref = Username.getText().toString();
-        SharedPreferences Pref = getSharedPreferences(Chat_Pref,0);
-        Pref.edit().putString(DISPLAY_SERVICE,UserNamePref).apply();
-
+    /** Saves username in SharedPreferences */
+    private void saveUsername() {
+        String username = etUsername.getText().toString().trim();
+        SharedPreferences pref = getSharedPreferences(CHAT_PREF, MODE_PRIVATE);
+        pref.edit().putString(USER_NAME, username).apply();
     }
 
+    /** Creates Firebase user */
+    private void createUser(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    Log.i("UserCreate", "User creation successful: " + task.isSuccessful());
 
-    //SignUp a User in Firebase
-    private void createUser(){
+                    if (!task.isSuccessful()) {
+                        showErrorDialog("Oops! Registration Failed");
+                    } else {
+                        saveUsername();
+                        Toast.makeText(getApplicationContext(),
+                                "Registration completed successfully",
+                                Toast.LENGTH_LONG).show();
 
-        String email = Email.getText().toString();
-        String password = Password.getText().toString();
-
-         //call method from firebase
-        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                //Delete before production
-                Log.i("UserCreate","User creation was: " + task.isSuccessful());
-
-                if(!task.isSuccessful()){
-                    ErrorDialog("Oops! Registration Failed");
-                }else {
-                    SaveUsername();
-                    Toast.makeText(getApplicationContext(),"Registration is completed",Toast.LENGTH_LONG).show();
-
-                    //Moving user to Login Screen`on Success
-                    Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                    finish();
-                    startActivity(intent);
-                }
-
-            }
-        });
-
+                        // Navigate to MainActivity
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
 
-
-
-    //create error dialog box
-    private void ErrorDialog(String message){
+    /** Shows an alert dialog with error message */
+    private void showErrorDialog(String message) {
         new AlertDialog.Builder(this)
                 .setTitle("Alert")
                 .setMessage(message)
-                .setPositiveButton(android.R.string.ok,null)
+                .setPositiveButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
-
-
-
-
-
 }
